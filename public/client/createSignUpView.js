@@ -26,33 +26,10 @@ Shortly.createLinkView = Backbone.View.extend({
     $form.val('');
   },
   // CHANGE SUCCESS TO WHATEVER IS APPROPRIATE
-  success: function(link) {
-    this.stopSpinner();
-    var view = new Shortly.LinkView({ model: link });
-    this.$el.find('.message').append(view.render().$el.hide().fadeIn());
+  success: function() {
   },
 
-  failure: function(model, res) {
-    this.stopSpinner();
-    this.$el.find('.message')
-      .html('Please enter a valid URL')
-      .addClass('error');
-    return this;
-  },
-
-  startSpinner: function() {
-    this.$el.find('img').show();
-    this.$el.find('form input[type=submit]').attr('disabled', 'true');
-    this.$el.find('.message')
-      .html('')
-      .removeClass('error');
-  },
-
-  stopSpinner: function() {
-    this.$el.find('img').fadeOut('fast');
-    this.$el.find('form input[type=submit]').attr('disabled', null);
-    this.$el.find('.message')
-      .html('')
-      .removeClass('error');
+  failure: function() {
   }
+
 });
