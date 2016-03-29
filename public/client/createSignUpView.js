@@ -1,12 +1,12 @@
 Shortly.createLinkView = Backbone.View.extend({
   className: 'creator',
 
-  template: Templates['login'],
+  template: Templates['create'],
 
   // on submit, go to index.html
   // THIS NEEDS TO CHANGE
   events: {
-    'submit': 'shortenUrl'
+    'submit': 'signup'
   },
 
   render: function() {
@@ -14,22 +14,31 @@ Shortly.createLinkView = Backbone.View.extend({
     return this;
   },
 
-  // CHANGE EVENT TO REDIRECT
-  shortenUrl: function(e) {
-    e.preventDefault();
-    var $form = this.$el.find('form .text');
-    var link = new Shortly.Link({ url: $form.val() });
-    link.on('request', this.startSpinner, this);
-    link.on('sync', this.success, this);
-    link.on('error', this.failure, this);
-    link.save({});
-    $form.val('');
-  },
+  signup: function() {
+
+  }, 
+ 
   // CHANGE SUCCESS TO WHATEVER IS APPROPRIATE
   success: function() {
   },
 
   failure: function() {
+  }, 
+
+  startSpinner: function() {
+    this.$el.find('img').show();
+    this.$el.find('form input[type=submit]').attr('disabled', 'true');
+    this.$el.find('.message')
+      .html('')
+      .removeClass('error');
+  },
+
+  stopSpinner: function() {
+    this.$el.find('img').fadeOut('fast');
+    this.$el.find('form input[type=submit]').attr('disabled', null);
+    this.$el.find('.message')
+      .html('')
+      .removeClass('error');
   }
 
 });

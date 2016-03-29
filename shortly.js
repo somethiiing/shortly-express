@@ -50,6 +50,10 @@ app.get('/signup', function(req, res) {
   res.render('signup');
 }); 
 
+app.post('/login', function(req, res) {
+  var url = req.body.url;
+});
+
 app.post('/links', 
 function(req, res) {
   var uri = req.body.url;
@@ -112,6 +116,8 @@ app.get('/*', function(req, res) {
     }
   });
 });
+
+
 
 console.log('Shortly is listening on 4568');
 app.listen(4568);
